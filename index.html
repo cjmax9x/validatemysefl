@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Vadilation Nodemy</title>
+</head>
+<body>
+    <div class="app">
+        <form class="container" method="POST">
+            <h3 class="heading">Register</h3>
+
+            <div class="input_box">
+                <input id="username" class="input" type="text" placeholder="Username">
+                <span class="border"></span>
+                <span class="message"></span>
+            </div>
+            <div class="input_box">
+                <input id="email" class="input" type="email" placeholder="Email">
+                <span class="border"></span>
+                <span class="message"></span>
+            </div>
+            <div class="input_box">
+                <input id="password" class="input" type="password" placeholder="Password">
+                <span class="border"></span>
+                <span class="message"></span>
+            </div>
+            <div class="input_box">
+                <input id="cfpassword" class="input" type="password" placeholder="Confirm password">
+                <span class="border"></span>
+                <span class="message"></span>
+            </div>
+
+            <button class="btn">Login</button>
+
+            <div class="registion_box">
+                <span class="registion_sugget">Not a member?</span>
+                <span class="registion_sign">Signup</span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let formElement = document.querySelector('.container')
+        formElement.onsubmit = function(e){
+            e.preventDefault()
+        }
+        let userName = document.querySelector('#username')
+        let email = document.querySelector('#email')
+        let password = document.querySelector('#password')
+        let cfPassword = document.querySelector('#cfpassword')
+
+        function isRequired (input){
+            let value = input.value.trim()
+            if(value == ''){
+                input.parentElement.querySelector('.message').innerText = 'Vui lòng nhập thông tin'
+                return false
+            }else{
+                input.parentElement.querySelector('.message').innerText = ''
+                return true
+            }
+        }
+        function minLength (input, min){
+            let value = input.value.trim()
+            if(value.length < min){
+                input.parentElement.querySelector('.message').innerText =
+                 `Vui lòng nhập tối thiểu ${min} ký tự`
+                 return false
+
+            } else{
+                input.parentElement.querySelector('.message').innerText = ''
+                return true
+
+            }
+        }
+        function emailRule (input){
+            let value = input.value.trim()
+            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            if(!regex.test(value)) {
+                input.parentElement.querySelector('.message').innerText = 'Vui lòng nhập đúng email'
+                return false
+
+            } else{
+                input.parentElement.querySelector('.message').innerText = ''
+                return true
+
+            }
+        }
+        function confirmPassWord(input, inputCf){
+            if(input.value.trim() !== inputCf.value.trim()){
+                inputCf.parentElement.querySelector('.message').innerText = 'Vui lòng xem lại mật khẩu'
+                return false
+
+            } else{
+                inputCf.parentElement.querySelector('.message').innerText = ''
+                return true
+
+            }
+        }
+         let btnElement = document.querySelector('.btn')
+
+         btnElement.addEventListener('click', submitEvent)
+         document.addEventListener('keydown', function(e){
+             if(e.key ==='Enter'){
+                submitEvent ()
+             }
+         })
+
+         function submitEvent (){
+            let callUserName = isRequired(username)
+                let callEmail = email.value.trim() ? emailRule(email) : isRequired(email)
+                let callPassword = password.value.trim() ? minLength(password, 6) : isRequired(password)
+                let callCfPassword = cfPassword.value.trim() ? confirmPassWord(password, cfPassword) : isRequired(cfPassword)
+            if(callUserName&&callEmail&&callPassword&&callCfPassword){
+                let information = {
+                    username: username.value.trim(),
+                    email: email.value.trim(),
+                    password: password.value.trim(),
+                    confirmpassword: cfPassword.value.trim()
+                }
+                console.log(information)
+            }
+         
+         }
+        
+         userName.oninput = function(){
+            isRequired(username)
+         }
+         email.oninput = function(){
+            emailRule(email)
+         }
+         password.oninput = function(){
+            minLength(password, 6)
+         }
+         cfPassword.oninput = function(){
+            confirmPassWord(password, cfPassword)
+         }
+         
+    </script>
+</body>
+</html>

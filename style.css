@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.app{
+    height: 120vh;
+    background: linear-gradient(120deg, #3ca7ee, #9b408f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    border-radius: 4px;
+    padding: 20px;
+    background-color: #fff;
+}
+.heading{
+    width: 100%;
+    font-size: 3.0rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.input_box{
+    width: 300px;
+    margin-bottom: 20px;
+    position: relative;
+    border-bottom: 3px solid #ADADAD;
+}
+.input{
+    border: 0;
+    outline: none;
+    font-size: 1.2rem;
+    padding: 10px 10px;
+    width: 100%;
+}
+.border{
+    top: 100%;
+    left: 0;
+    position: absolute;
+    height: 3px;
+    width: 0%;
+    background-color: #3ca7ee;
+    transition: 0.6s all;
+}
+.input:focus ~ .border{
+    width: 100%;
+}
+.btn{
+    width: 100%;
+    background-color: #3ca7ee;
+    border: 0;
+    border-radius: 4px;
+    height: 40px;
+    cursor: pointer;
+}
+.message{
+    position: absolute;
+    top: 40%;
+    right: 0;
+    display: block;
+    color: red;
+    font-size:0.7rem;
+    font-weight: 400;
+}
+.registion_box{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.registion_sign{
+    color: #3ca7ee;
+    cursor: pointer;
+}
